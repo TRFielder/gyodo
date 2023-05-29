@@ -1,23 +1,15 @@
-require("dotenv").config();
-const { REST, Routes } = require("discord.js");
+import dotenv from "dotenv";
+dotenv.config();
+import { REST, Routes } from "discord.js";
 
-const fs = require("node:fs");
-const path = require("node:path");
+//Import slash commands
+import ping from "./commands/Ping/ping.js";
+import soundtrack from "./commands/Soundtrack/soundtrack.js";
+import player from "./commands/Player/player.js";
 
-const commands = [];
+const commands = [ping, soundtrack, player];
 
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	if ("data" in command && "execute" in command) {
-		commands.push(command.data.toJSON());
-	} else {
-		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-	}
-}
+const commandData = commands.map((command) => command.data);
 
 //Prepare an instance of the REST module
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
@@ -27,7 +19,7 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.SERVER_ID), {
-			body: commands,
+			body: commandData,
 		});
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands`);
