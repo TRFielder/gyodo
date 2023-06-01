@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const player = {
+	cooldown: 10,
 	data: new SlashCommandBuilder()
 		.setName("player")
 		.setDescription(
