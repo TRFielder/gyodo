@@ -19,6 +19,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@rpglogs/api-sdk": "^1.0.0",
+		"btoa": "^1.2.1",
 		"discord.js": "^14.11.0",
 		"dotenv": "^16.0.3"
 	}
