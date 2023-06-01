@@ -6,12 +6,13 @@ dotenv.config();
 import ping from "./commands/Ping/ping.js";
 import soundtrack from "./commands/Soundtrack/soundtrack.js";
 import player from "./commands/Player/player.js";
+import refresh from "./commands/Refresh/refresh.js";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 
-const commands = [ping, soundtrack, player];
+const commands = [ping, soundtrack, player, refresh];
 
 commands.map((command) => {
 	client.commands.set(command.data.name, command);
