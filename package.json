@@ -4,7 +4,8 @@
 	"description": "A discord bot to organise your raid group in FFXIV",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js"
 	},
 	"author": "Tom Fielder <me@tomfielder.co.uk> (http://tomfielder.co.uk/)",
 	"license": "ISC",
