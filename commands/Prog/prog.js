@@ -36,10 +36,6 @@ const encounterID = [
 	},
 ];
 
-const characterName = "Capo Nhyvah";
-const serverSlug = "Lich";
-const serverRegion = "EU";
-
 const populateQuery = (characterName, serverSlug, serverRegion) => gql`
 	query {
 		characterData {
@@ -69,6 +65,7 @@ const prog = {
 		),
 
 	async execute(interaction) {
+		await interaction.deferReply();
 		const name = interaction.options.getString("name");
 		const server = interaction.options.getString("server");
 		const region = interaction.options.getString("region");
@@ -112,11 +109,10 @@ const prog = {
 					}
 				);
 
-			await interaction.reply(`Looking up proggies for ${name} on ${server} (${region})`);
-			await interaction.channel.send({ embeds: [reply] });
+			await interaction.followUp({ embeds: [reply] });
 		} catch (error) {
 			console.error(error);
-			await interaction.reply(
+			await interaction.followUp(
 				`There was an error whilst looking for ${name} on ${server} (${region}): ${error.message}`
 			);
 		}

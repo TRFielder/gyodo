@@ -6,15 +6,16 @@ dotenv.config();
 import ping from "./commands/Ping/ping.js";
 import soundtrack from "./commands/Soundtrack/soundtrack.js";
 import player from "./commands/Player/player.js";
-import refresh from "./commands/Refresh/refresh.js";
 import prog from "./commands/Prog/prog.js";
+import apexwin from "./commands/ApexWin/apexwin.js";
+import refresh from "./commands/Refresh/refresh.js";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
 
-const commands = [ping, soundtrack, player, prog, refresh];
+const commands = [ping, soundtrack, player, prog, , apexwin, refresh];
 
 commands.map((command) => {
 	client.commands.set(command.data.name, command);
